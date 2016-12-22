@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="server.goodsInfo.dao.GoodsInfoMapper" >
+  <resultMap id="BaseResultMap" type="server.goodsInfo.entity.GoodsInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+    <result column="goodskindid" property="goodskindid" jdbcType="VARCHAR" />
+    <result column="goodsprice" property="goodsprice" jdbcType="DOUBLE" />
+    <result column="goodsnum" property="goodsnum" jdbcType="INTEGER" />
+    <result column="goodspic" property="goodspic" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="DATE" />
+    <result column="updatetime" property="updatetime" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="server.goodsInfo.entity.GoodsInfo" extends="BaseResultMap" >
+    <result column="goodsdescription" property="goodsdescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, goodsname, goodskindid, goodsprice, goodsnum, goodspic, createtime, updatetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    goodsdescription
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goodsinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goodsinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="server.goodsInfo.entity.GoodsInfo" >
+    insert into goodsinfo (Id, goodsname, goodskindid, 
+      goodsprice, goodsnum, goodspic, 
+      createtime, updatetime, goodsdescription
+      )
+    values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{goodskindid,jdbcType=VARCHAR}, 
+      #{goodsprice,jdbcType=DOUBLE}, #{goodsnum,jdbcType=INTEGER}, #{goodspic,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=DATE}, #{updatetime,jdbcType=DATE}, #{goodsdescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="server.goodsInfo.entity.GoodsInfo" >
+    insert into goodsinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="goodsname != null" >
+        goodsname,
+      </if>
+      <if test="goodskindid != null" >
+        goodskindid,
+      </if>
+      <if test="goodsprice != null" >
+        goodsprice,
+      </if>
+      <if test="goodsnum != null" >
+        goodsnum,
+      </if>
+      <if test="goodspic != null" >
+        goodspic,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="goodsdescription != null" >
+        goodsdescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodskindid != null" >
+        #{goodskindid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null" >
+        #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsnum != null" >
+        #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodspic != null" >
+        #{goodspic,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="goodsdescription != null" >
+        #{goodsdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="server.goodsInfo.entity.GoodsInfo" >
+    update goodsinfo
+    <set >
+      <if test="goodsname != null" >
+        goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodskindid != null" >
+        goodskindid = #{goodskindid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null" >
+        goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsnum != null" >
+        goodsnum = #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodspic != null" >
+        goodspic = #{goodspic,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="goodsdescription != null" >
+        goodsdescription = #{goodsdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="server.goodsInfo.entity.GoodsInfo" >
+    update goodsinfo
+    set goodsname = #{goodsname,jdbcType=VARCHAR},
+      goodskindid = #{goodskindid,jdbcType=VARCHAR},
+      goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      goodsnum = #{goodsnum,jdbcType=INTEGER},
+      goodspic = #{goodspic,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=DATE},
+      goodsdescription = #{goodsdescription,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="server.goodsInfo.entity.GoodsInfo" >
+    update goodsinfo
+    set goodsname = #{goodsname,jdbcType=VARCHAR},
+      goodskindid = #{goodskindid,jdbcType=VARCHAR},
+      goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      goodsnum = #{goodsnum,jdbcType=INTEGER},
+      goodspic = #{goodspic,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=DATE}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="server.orderInfo.dao.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="server.orderInfo.entity.OrderInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="orderno" property="orderno" jdbcType="VARCHAR" />
+    <result column="ordertotalprice" property="ordertotalprice" jdbcType="DOUBLE" />
+    <result column="orderstatus" property="orderstatus" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="DATE" />
+    <result column="updatetime" property="updatetime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, userid, orderno, ordertotalprice, orderstatus, createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orderinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="server.orderInfo.entity.OrderInfo" >
+    insert into orderinfo (Id, userid, orderno, 
+      ordertotalprice, orderstatus, createtime, 
+      updatetime)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, 
+      #{ordertotalprice,jdbcType=DOUBLE}, #{orderstatus,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, 
+      #{updatetime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="server.orderInfo.entity.OrderInfo" >
+    insert into orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="orderno != null" >
+        orderno,
+      </if>
+      <if test="ordertotalprice != null" >
+        ordertotalprice,
+      </if>
+      <if test="orderstatus != null" >
+        orderstatus,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertotalprice != null" >
+        #{ordertotalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="server.orderInfo.entity.OrderInfo" >
+    update orderinfo
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        orderno = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertotalprice != null" >
+        ordertotalprice = #{ordertotalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="orderstatus != null" >
+        orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="server.orderInfo.entity.OrderInfo" >
+    update orderinfo
+    set userid = #{userid,jdbcType=INTEGER},
+      orderno = #{orderno,jdbcType=VARCHAR},
+      ordertotalprice = #{ordertotalprice,jdbcType=DOUBLE},
+      orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=DATE}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

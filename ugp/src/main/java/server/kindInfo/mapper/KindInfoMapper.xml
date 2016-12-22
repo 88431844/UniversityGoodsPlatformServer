@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="server.kindInfo.dao.KindInfoMapper" >
+  <resultMap id="BaseResultMap" type="server.kindInfo.entity.KindInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="kindname" property="kindname" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, kindname, parentid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from kindinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from kindinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="server.kindInfo.entity.KindInfo" >
+    insert into kindinfo (Id, kindname, parentid
+      )
+    values (#{id,jdbcType=INTEGER}, #{kindname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="server.kindInfo.entity.KindInfo" >
+    insert into kindinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="kindname != null" >
+        kindname,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="kindname != null" >
+        #{kindname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="server.kindInfo.entity.KindInfo" >
+    update kindinfo
+    <set >
+      <if test="kindname != null" >
+        kindname = #{kindname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="server.kindInfo.entity.KindInfo" >
+    update kindinfo
+    set kindname = #{kindname,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
