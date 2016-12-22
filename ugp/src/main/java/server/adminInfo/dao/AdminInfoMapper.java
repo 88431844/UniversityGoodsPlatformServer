@@ -3,6 +3,7 @@ package server.adminInfo.dao;
 import java.util.List;
 
 import server.adminInfo.dto.AdminInfoDto;
+import server.adminInfo.dto.AdminLoginReqDto;
 import server.adminInfo.entity.AdminInfo;
 
 public interface AdminInfoMapper {
@@ -19,4 +20,6 @@ public interface AdminInfoMapper {
     int updateByPrimaryKey(AdminInfo record);
     
     List<AdminInfoDto> select(AdminInfoDto adto);
+
+	String adminLogin(AdminLoginReqDto req);
 }
